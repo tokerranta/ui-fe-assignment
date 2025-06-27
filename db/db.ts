@@ -19,3 +19,21 @@ export const getDeviceById = (id: string) =>
     }
     return found;
   });
+
+export const getNextDeviceId = (id: string) =>
+  getAllDevices().map((devices) => {
+    const index = devices.findIndex((device) => device.id === id);
+    if (index === -1 || index === devices.length - 1) {
+      return null;
+    }
+    return devices[index + 1].id;
+  });
+
+export const getPreviousDeviceId = (id: string) =>
+  getAllDevices().map((devices) => {
+    const index = devices.findIndex((device) => device.id === id);
+    if (index === -1 || index === 0) {
+      return null;
+    }
+    return devices[index - 1].id;
+  });

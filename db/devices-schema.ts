@@ -11,6 +11,26 @@ export const DeviceSchema = z.object({
   product: z.object({
     name: z.string(),
   }),
+  shortnames: z.array(z.string()).optional(),
+  unifi: z
+    .object({
+      network: z
+        .object({
+          radios: z
+            .object({
+              na: z
+                .object({
+                  maxPower: z.number().optional(),
+                  maxSpeedMegabitsPerSecond: z.number(),
+                })
+                .optional(),
+            })
+            .optional(),
+          numberOfPorts: z.number().optional(),
+        })
+        .optional(),
+    })
+    .optional(),
 });
 
 export type Device = z.infer<typeof DeviceSchema>;
