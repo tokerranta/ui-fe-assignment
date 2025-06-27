@@ -94,20 +94,20 @@ export const Autocomplete = ({
     }
   };
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-center py-4">
       <div className="relative">
         <form onSubmit={handleSubmit}>
           <input
             type="search"
-            className="border rounded w-full py-2 px-3 focus:border-blue-500"
+            className=" bg-gray-200 rounded w-full py-2 px-3 focus:outline-none focus:ring-1 focus:ring-blue-500"
             value={search}
             onChange={handleChange}
-            placeholder="Search devices..."
+            placeholder="Search"
             onKeyDown={handleKeyDown}
           />
         </form>
         {showResults && (
-          <ul className="absolute bg-white rounded w-full shadow-2xl max-h-60 overflow-y-auto">
+          <ul className="absolute z-100 bg-white rounded w-full shadow-2xl max-h-60 overflow-y-auto">
             {filteredOptions.map((option, index) => (
               <li
                 key={option.value + index}
@@ -124,7 +124,9 @@ export const Autocomplete = ({
           </ul>
         )}
       </div>
-      <div>{filteredOptions.length} results founds</div>
+      <div className="text-gray-300">
+        {filteredOptions.length} results found
+      </div>
     </div>
   );
 };
