@@ -1,5 +1,5 @@
 'use client';
-import { Device } from '@/db/devices-schema';
+import { Device } from '@/api/devices-schema';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { Autocomplete } from '@/app/components';

@@ -1,5 +1,5 @@
 import { ErrorMessage } from '@/app/components/error-message';
-import { getDeviceById, getNextDeviceId, getPreviousDeviceId } from '@/db/db';
+import { getDeviceById, getNextDeviceId, getPreviousDeviceId } from '@/api';
 import { DeviceDetails } from './device-details';
 
 export default async function DeviceDetailsPage({
@@ -9,19 +9,19 @@ export default async function DeviceDetailsPage({
 }) {
   const { deviceId } = await params;
   return getDeviceById(deviceId)
-    .map((device) => {
-      const nextDeviceId = getNextDeviceId(deviceId).execute({
+    .map(async (device) => {
+      const nextDeviceId = await getNextDeviceId(deviceId).match({
         onOk: (id) => id,
         onError: () => null,
       });
-      const previousDeviceId = getPreviousDeviceId(deviceId).execute({
+      const previousDeviceId = await getPreviousDeviceId(deviceId).match({
         onOk: (id) => id,
         onError: () => null,
       });
 
-      return { device, nextDeviceId, previousDeviceId };
+      return { device: await device, nextDeviceId, previousDeviceId };
     })
-    .execute({
+    .match({
       onOk: ({ device, nextDeviceId, previousDeviceId }) => (
         <DeviceDetails
           device={device}
