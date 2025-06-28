@@ -1,4 +1,4 @@
-import { Device } from '@/db/devices-schema';
+import { Device } from '@/api/devices-schema';
 
 type ProductImageProps = {
   device: Device;

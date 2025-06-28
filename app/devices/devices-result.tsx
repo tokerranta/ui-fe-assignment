@@ -1,4 +1,4 @@
-import { Device } from '@/db/devices-schema';
+import { Device } from '@/api/devices-schema';
 import { useSearchParams } from 'next/navigation';
 
 type DevicesResultProps = {

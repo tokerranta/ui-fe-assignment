@@ -1,5 +1,5 @@
 import { ProductImage } from '@/app/components/product-image';
-import { Device } from '@/db/devices-schema';
+import { Device } from '@/api/devices-schema';
 import Link from 'next/link';
 import BackIcon from './back.svg';
 import ForwardIcon from './forward.svg';
