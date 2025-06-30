@@ -85,13 +85,19 @@ const TableView = ({ devices }: DevicesResultProps) => {
 export const DevicesResult = ({ devices }: DevicesResultProps) => {
   const searchParams = useSearchParams();
   const displayMode = searchParams.get('display') ?? 'list';
-
+  const filterParam = searchParams.get('filter');
+  const filters = filterParam
+    ? filterParam.split(',').map((f) => f.trim())
+    : [];
+  const filteredDevices = devices.filter((device) =>
+    filters.length > 0 ? filters.includes(device.line.name) : true
+  );
   return (
     <div className="p-4">
       {displayMode === 'grid' ? (
-        <GridView devices={devices} />
+        <GridView devices={filteredDevices} />
       ) : (
-        <TableView devices={devices} />
+        <TableView devices={filteredDevices} />
       )}
     </div>
   );
